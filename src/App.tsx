@@ -76,7 +76,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const env = urlParams.get('env') ?? 'production'
 const envConfig = environments.find(x => x.name === env)
 const walletAppURL = urlParams.get('walletAppURL') ?? envConfig.walletUrl
-const { projectAccessKey } = envConfig
+const projectAccessKey = urlParams.get('projectAccessKey') ?? envConfig.projectAccessKey
 const showProhibitedActions = urlParams.has('showProhibitedActions')
 
 if (walletAppURL && walletAppURL.length > 0) {
