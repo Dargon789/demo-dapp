@@ -54,6 +54,11 @@ const environments: Environment[] = [
     name: 'local',
     walletUrl: 'http://localhost:3333',
     projectAccessKey: 'AQAAAAAAAAVCXiQ9f_57R44MjorZ4SmGdhA'
+  },
+  {
+    name: 'custom',
+    walletUrl: '',
+    projectAccessKey: ''
   }
 ]
 
@@ -78,6 +83,8 @@ const envConfig = environments.find(x => x.name === env)
 const walletAppURL = urlParams.get('walletAppURL') ?? envConfig.walletUrl
 const projectAccessKey = urlParams.get('projectAccessKey') ?? envConfig.projectAccessKey
 const showProhibitedActions = urlParams.has('showProhibitedActions')
+
+const isCustom = walletAppURL !== envConfig.walletUrl || projectAccessKey !== envConfig.projectAccessKey
 
 if (walletAppURL && walletAppURL.length > 0) {
   // Wallet can point to a custom wallet app url
@@ -993,37 +1000,39 @@ And that has made all the difference.
 
       <Divider background="buttonGlass" />
 
-      <Box marginBottom="4">
-        <Select
-          name="environment"
-          label={'Environment'}
-          labelLocation="top"
-          onValueChange={value => {
-            // Disconnect the wallet
-            disconnect()
+      {!isCustom && (
+        <Box marginBottom="4">
+          <Select
+            name="environment"
+            label={'Environment'}
+            labelLocation="top"
+            onValueChange={value => {
+              // Disconnect the wallet
+              disconnect()
 
-            // Set the new env url param
-            urlParams.set('env', value)
+              // Set the new env url param
+              urlParams.set('env', value)
 
-            // Clear any existing walletAppURL overrides
-            urlParams.delete('walletAppURL')
+              // Clear any existing walletAppURL overrides
+              urlParams.delete('walletAppURL')
 
-            // Update the url with the new params and refresh the page
-            window.location.search = urlParams.toString()
-          }}
-          value={env}
-          options={[
-            ...Object.values(environments).map(env => ({
-              label: (
-                <Box alignItems="center" gap="2">
-                  <Text capitalize>{env.name}</Text>
-                </Box>
-              ),
-              value: String(env.name)
-            }))
-          ]}
-        />
-      </Box>
+              // Update the url with the new params and refresh the page
+              window.location.search = urlParams.toString()
+            }}
+            value={env}
+            options={[
+              ...Object.values(environments).map(env => ({
+                label: (
+                  <Box alignItems="center" gap="2">
+                    <Text capitalize>{env.name}</Text>
+                  </Box>
+                ),
+                value: String(env.name)
+              }))
+            ]}
+          />
+        </Box>
+      )}
 
       <Box marginBottom="4">
         <Text as="div" variant="small" color="text100">
@@ -1045,6 +1054,30 @@ And that has made all the difference.
             {walletAppURL}
           </Text>
           <ExternalLinkIcon />
+        </Box>
+      </Box>
+
+      <Divider background="buttonGlass" />
+
+      <Box marginBottom="4">
+        <Text as="div" variant="small" color="text100">
+          Project Access Key
+        </Text>
+
+        <Box
+          as="a"
+          href={walletAppURL}
+          target="_blank"
+          rel="noopener"
+          textDecoration="none"
+          gap="1"
+          marginTop="1"
+          alignItems="center"
+          color="text80"
+        >
+          <Text as="div" variant="normal" color="text80">
+            {projectAccessKey}
+          </Text>
         </Box>
       </Box>
 
