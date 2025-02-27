@@ -30,27 +30,35 @@ import logoUrl from './images/logo.svg'
 import skyweaverBannerUrl from './images/skyweaver-banner.png'
 import skyweaverBannerLargeUrl from './images/skyweaver-banner-large.png'
 
-const PROJECT_ACCESS_KEY = 'AQAAAAAAAAbvrgpWEC2Aefg5qYStQmwjBpA'
-
 configureLogger({ logLevel: 'DEBUG' })
 
 interface Environment {
   name: string
   walletUrl: string
+  projectAccessKey: string
 }
 
 const environments: Environment[] = [
   {
     name: 'production',
-    walletUrl: 'https://sequence.app'
+    walletUrl: 'https://sequence.app',
+    projectAccessKey: 'AQAAAAAAAAbvrgpWEC2Aefg5qYStQmwjBpA'
   },
   {
     name: 'development',
-    walletUrl: 'https://dev.sequence.app'
+    walletUrl: 'https://dev.sequence.app',
+    //projectAccessKey: 'AQAAAAAAAAVBNfoB30kz7Ph4I_Qs5mkYuDc',
+    projectAccessKey: 'AQAAAAAAAAVCXiQ9f_57R44MjorZ4SmGdhA'
   },
   {
     name: 'local',
-    walletUrl: 'http://localhost:3333'
+    walletUrl: 'http://localhost:3333',
+    projectAccessKey: 'AQAAAAAAAAVCXiQ9f_57R44MjorZ4SmGdhA'
+  },
+  {
+    name: 'custom',
+    walletUrl: '',
+    projectAccessKey: ''
   }
 ]
 
@@ -73,16 +81,19 @@ const urlParams = new URLSearchParams(window.location.search)
 const env = urlParams.get('env') ?? 'production'
 const envConfig = environments.find(x => x.name === env)
 const walletAppURL = urlParams.get('walletAppURL') ?? envConfig.walletUrl
+const projectAccessKey = urlParams.get('projectAccessKey') ?? envConfig.projectAccessKey
 const showProhibitedActions = urlParams.has('showProhibitedActions')
+
+const isCustom = walletAppURL !== envConfig.walletUrl || projectAccessKey !== envConfig.projectAccessKey
 
 if (walletAppURL && walletAppURL.length > 0) {
   // Wallet can point to a custom wallet app url
   // NOTICE: this is not needed, unless testing an alpha version of the wallet
-  sequence.initWallet(PROJECT_ACCESS_KEY, { defaultNetwork: defaultChainId, transports: { walletAppURL } })
+  sequence.initWallet(projectAccessKey, { defaultNetwork: defaultChainId, transports: { walletAppURL } })
 } else {
   // Init the sequence wallet library at the top-level of your project with
   // your designed default chain id
-  sequence.initWallet(PROJECT_ACCESS_KEY, { defaultNetwork: defaultChainId, transports: { walletAppURL } })
+  sequence.initWallet(projectAccessKey, { defaultNetwork: defaultChainId, transports: { walletAppURL } })
 }
 
 // App component
@@ -989,34 +1000,39 @@ And that has made all the difference.
 
       <Divider background="buttonGlass" />
 
-      <Box marginBottom="4">
-        <Select
-          name="environment"
-          label={'Environment'}
-          labelLocation="top"
-          onValueChange={value => {
-            // Set the new env url param
-            urlParams.set('env', value)
+      {!isCustom && (
+        <Box marginBottom="4">
+          <Select
+            name="environment"
+            label={'Environment'}
+            labelLocation="top"
+            onValueChange={value => {
+              // Disconnect the wallet
+              disconnect()
 
-            // Clear any existing walletAppURL overrides
-            urlParams.delete('walletAppURL')
+              // Set the new env url param
+              urlParams.set('env', value)
 
-            // Update the url with the new params and refresh the page
-            window.location.search = urlParams.toString()
-          }}
-          value={env}
-          options={[
-            ...Object.values(environments).map(env => ({
-              label: (
-                <Box alignItems="center" gap="2">
-                  <Text capitalize>{env.name}</Text>
-                </Box>
-              ),
-              value: String(env.name)
-            }))
-          ]}
-        />
-      </Box>
+              // Clear any existing walletAppURL overrides
+              urlParams.delete('walletAppURL')
+
+              // Update the url with the new params and refresh the page
+              window.location.search = urlParams.toString()
+            }}
+            value={env}
+            options={[
+              ...Object.values(environments).map(env => ({
+                label: (
+                  <Box alignItems="center" gap="2">
+                    <Text capitalize>{env.name}</Text>
+                  </Box>
+                ),
+                value: String(env.name)
+              }))
+            ]}
+          />
+        </Box>
+      )}
 
       <Box marginBottom="4">
         <Text as="div" variant="small" color="text100">
@@ -1038,6 +1054,30 @@ And that has made all the difference.
             {walletAppURL}
           </Text>
           <ExternalLinkIcon />
+        </Box>
+      </Box>
+
+      <Divider background="buttonGlass" />
+
+      <Box marginBottom="4">
+        <Text as="div" variant="small" color="text100">
+          Project Access Key
+        </Text>
+
+        <Box
+          as="a"
+          href={walletAppURL}
+          target="_blank"
+          rel="noopener"
+          textDecoration="none"
+          gap="1"
+          marginTop="1"
+          alignItems="center"
+          color="text80"
+        >
+          <Text as="div" variant="normal" color="text80">
+            {projectAccessKey}
+          </Text>
         </Box>
       </Box>
 
