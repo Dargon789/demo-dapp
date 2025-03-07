@@ -23,7 +23,7 @@
     "@0xsequence/network": "2.2.13",
     "@0xsequence/provider": "2.2.13",
     "@0xsequence/utils": "2.2.13",
-    "@types/node": "^20.11.30",
+    "@types/node": "^22.13.4",
     "@types/react": "^18.3.7",
     "@types/react-dom": "^18.3.0",
     "@vanilla-extract/css": "^1.14.1",
