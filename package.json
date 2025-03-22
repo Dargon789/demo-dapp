@@ -20,7 +20,7 @@
     "@0xsequence/abi": "2.2.14",
     "@0xsequence/design-system": "^2.0.2",
     "@0xsequence/ethauth": "^1.0.0",
-    "@0xsequence/network": "2.2.13",
+    "@0xsequence/network": "2.2.14",
     "@0xsequence/provider": "2.2.13",
     "@0xsequence/utils": "2.2.14",
     "@types/node": "^22.13.4",
