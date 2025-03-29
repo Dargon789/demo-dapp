@@ -16,22 +16,22 @@
     "clear:vite:cache": "rm -rf node_modules/.vite/"
   },
   "dependencies": {
-    "0xsequence": "2.2.3",
-    "@0xsequence/abi": "2.2.13",
-    "@0xsequence/design-system": "^1.8.1",
+    "0xsequence": "2.2.13",
+    "@0xsequence/abi": "2.2.14",
+    "@0xsequence/design-system": "^2.0.2",
     "@0xsequence/ethauth": "^1.0.0",
-    "@0xsequence/network": "2.2.13",
+    "@0xsequence/network": "2.2.14",
     "@0xsequence/provider": "2.2.13",
-    "@0xsequence/utils": "2.2.13",
-    "@types/node": "^20.11.30",
-    "@types/react": "^18.3.7",
+    "@0xsequence/utils": "2.2.14",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.10",
     "@types/react-dom": "^18.3.0",
     "@vanilla-extract/css": "^1.14.1",
     "ethers": "^6.13.4",
-    "framer-motion": "^9.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^4.5.5"
+    "framer-motion": "^12.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@vanilla-extract/vite-plugin": "^4.0.6",
