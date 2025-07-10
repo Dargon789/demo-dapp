@@ -34,7 +34,7 @@
     "typescript": "^5.8.2"
   },
   "devDependencies": {
-    "@vanilla-extract/vite-plugin": "^4.0.6",
+    "@vanilla-extract/vite-plugin": "^5.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "vite": "^6.3.4",
     "vite-plugin-svgr": "^4.2.0",
