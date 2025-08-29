@@ -22,7 +22,7 @@
     "@0xsequence/ethauth": "^1.0.0",
     "@0xsequence/network": "2.3.16",
     "@0xsequence/provider": "2.2.13",
-    "@0xsequence/utils": "2.3.11",
+    "@0xsequence/utils": "2.3.22",
     "@types/node": "^22.13.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.1.5",
