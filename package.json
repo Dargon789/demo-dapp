@@ -31,7 +31,7 @@
     "framer-motion": "^12.23.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@vanilla-extract/vite-plugin": "^5.0.2",
