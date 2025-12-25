@@ -16,7 +16,7 @@
     "clear:vite:cache": "rm -rf node_modules/.vite/"
   },
   "dependencies": {
-    "0xsequence": "2.2.13",
+    "0xsequence": "2.3.25",
     "@0xsequence/abi": "2.3.23",
     "@0xsequence/design-system": "^3.0.1",
     "@0xsequence/ethauth": "^1.0.0",
