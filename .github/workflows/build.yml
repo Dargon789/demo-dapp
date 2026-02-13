@@ -3,7 +3,6 @@ name: build dapp
 on:
   push:
     branches:
-      - master
       - main
 
 jobs:
