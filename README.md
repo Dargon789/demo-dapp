@@ -14,7 +14,7 @@
 
 <p align="center">
   Reactive primitives for Ethereum apps
-<p>
+</p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/wagmi">
