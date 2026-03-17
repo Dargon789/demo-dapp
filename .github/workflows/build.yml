@@ -1,4 +1,4 @@
-name: build dapp
+name: build app
 
 on:
   push:
