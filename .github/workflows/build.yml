@@ -1,4 +1,4 @@
-name: build app
+name: build dapp
 
 on:
   push:
@@ -18,9 +18,9 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 10.14.0
-          run_install: pnpm install --no-frozen-lockfile 
-          
+          version: 9
+          run_install: true
+
       - name: Build
         run: pnpm dist
 
