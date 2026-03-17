@@ -18,9 +18,9 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 9
-          run_install: true
-
+          version: 10.14.0
+          run_install: pnpm install --no-frozen-lockfile 
+          
       - name: Build
         run: pnpm dist
 
