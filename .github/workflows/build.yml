@@ -1,4 +1,4 @@
-name: build dapp
+name: build app
 
 on:
   push:
@@ -7,6 +7,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     name: Build and Push
     steps:
@@ -16,9 +18,9 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 8
-          run_install: true
-
+          version: 10.14.0
+          run_install: pnpm install --no-frozen-lockfile 
+          
       - name: Build
         run: pnpm dist
 
