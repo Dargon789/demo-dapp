@@ -85,7 +85,7 @@ If you find Wagmi useful or use it for work, please consider [sponsoring Wagmi](
 </p>
 
 
-demo app example on how to use Sequence Wallet. Covers how to connect, sign messages and send transctions.
+Demo app example on how to use Sequence Wallet. Covers how to connect, sign messages and send transactions.
 
 Try this dapp at: [https://0xsequence.github.io/demo-dapp](https://0xsequence.github.io/demo-dapp)
 
